@@ -187,8 +187,8 @@ void PID(int fb) { //parameter allows to adjust pwm based off forward or backwar
   Serial.println("in PID");
   // Adjust the rotational speeds by the calculated pwm values.
   if (fb){ //fb = 1, forward
-    analogWrite(motor0_pwmPinA, pwm0);
-    analogWrite(motor1_pwmPinB, pwm1);
+    analogWrite(motor0_pwmPinA, pwm0); // set motor0 pwm1 to the calc value pwm0
+    analogWrite(motor1_pwmPinB, pwm1); // set motor1 pwm 2 to calc value pwm1
   }
   else{
     analogWrite(motor0_pwmPinB, pwm0);
@@ -230,8 +230,6 @@ void loop() {
             analogWrite(motor0_pwmPinB, 0); // pwma is high, so make pwmb to 0
             analogWrite(motor1_pwmPinA, 0); // pwmb 2 is high, so make pwma to 0
             PID(1);
-            analogWrite(motor0_pwmPinA, pwm0); // set motor0 pwm1 to the calc value pwm0
-            analogWrite(motor1_pwmPinB, pwm1); // set motor1 pwm 2 to calc value pwm1
             break; //breaks out of the switch loop and continues the original search
               
           case 'B' : //Backwards (back())
@@ -239,8 +237,6 @@ void loop() {
             analogWrite(motor0_pwmPinA, 0);
             analogWrite(motor1_pwmPinB, 0);
             PID(0);
-            analogWrite(motor0_pwmPinB, pwm0);
-            analogWrite(motor1_pwmPinA, pwm1);
             break; //breaks out of the switch loop and continues the original search
               
           case 'L' : //left
